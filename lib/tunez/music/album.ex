@@ -61,4 +61,9 @@ defmodule Tunez.Music.Album do
   end
 
   def next_year, do: Date.utc_today().year + 1
+
+  identities do
+    identity :unique_album_names_per_artist, [:name, :artist_id],
+      message: "already exists for this artist"
+  end
 end
