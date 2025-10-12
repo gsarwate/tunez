@@ -14,7 +14,11 @@ defmodule TunezWeb.Artists.IndexLive do
   def handle_params(params, _url, socket) do
     sort_by = Map.get(params, "sort_by") |> validate_sort_by()
     query_text = Map.get(params, "q", "")
-    artists = Tunez.Music.search_artists!(query_text)
+
+    artists =
+      Tunez.Music.search_artists!(query_text,
+        query: [sort_input: sort_by]
+      )
 
     socket =
       socket
